@@ -25,6 +25,23 @@ $i = 0;
     }
 */
 
+/*
+$data = array('Ferrari', 'Lamborghini', 'Tesla', 'Pugeot', 'Volkswagen', 'Range Rover');
+$i = 0;
+while ($i < count($data)) {
+    echo $data[$i]."<br>";
+    $i++;
+}
+*/
+
+/*
+echo $data[5];
+
+foreach($data as $value) {
+    echo $value."<br>";
+}
+*/
+
 // percabangan
 
 /*
@@ -99,4 +116,3 @@ echo $pesan;
     ?>
 </body>
 </html>
--->
