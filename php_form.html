@@ -10,11 +10,13 @@
 
 <body>
     <h1>Form Login</h1>
-    <form action="action.php?p=tampil" method="post">
-        Nama
+    <form action="action.php?p=gambar" method="post" enctype="multipart/form-data">
+        Nama :
         <input type="text" name="nama">
-        Password
+        Password :
         <input type="password" name="password">
+        File Upload :
+        <input type="file" name="berkas">
         <input type="submit" name="submit" value="Submit">
     </form>
 </body>

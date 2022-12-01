@@ -22,7 +22,7 @@ CREATE TABLE mahasiswa (
 -- insert jurusan -- 
 insert into jurusan (kode,nama) values ('ILPN','Ilmu Pemerintahan');
 -- insert mahasiswa -- 
- insert mahasiswa (id_jurusan,nim, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat) value (1, "20220003", "Lucky", "Perempuan", "Surabaya", "2000-10-8", "Jl. Soekarno Htta no 54");
+insert mahasiswa (id_jurusan,nim, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat) value (1, "20220003", "Lucky", "Perempuan", "Surabaya", "2000-10-8", "Jl. Soekarno Htta no 54");
 -- update mahasiswa --
 update mahasiswa set jenis_kelamin = "laki-laki" where id =1;
 -- delete mahasiswa -- 
