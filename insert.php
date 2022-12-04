@@ -9,7 +9,7 @@
         $tgl_lahir = $_POST['tgl_lahir'];
         $gender = $_POST['gender'];
         $alamat = $_POST['alamat'];
-
+        
         // 1. Buat koneksi dengan MySQL
         $con = mysqli_connect("localhost","root","","fakultas");
 
@@ -43,7 +43,7 @@
     <title>Tambah Data Mahasiswa</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="insert.php" method="post">
             NIM: <input type="text" name="nim"><br>
             Nama: <input type="text" name="nama"><br>
             ID Jurusan: <input type="number" name="id_jurusan"><br>
