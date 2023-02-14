@@ -1,4 +1,4 @@
-<?php
+ <?php
 $host       = "localhost";
 $user       = "root";
 $pass       = "";
@@ -8,6 +8,7 @@ $koneksi    = mysqli_connect($host, $user, $pass, $db);
 if (!$koneksi) { //cek koneksi
     die("Tidak bisa terkoneksi ke database");
 }
+$id         = "";
 $nim        = "";
 $nama       = "";
 $alamat     = "";
@@ -15,14 +16,21 @@ $fakultas   = "";
 $sukses     = "";
 $error      = "";
 
-if (isset($_GET['op'])) {
+if (isset($_GET['op'])) { 
     $op = $_GET['op'];
 } else {
     $op = "";
 }
+
+if (isset($_GET['id'])){
+    $id = $_GET['id'];
+}   else {
+    $id = "";
+}
+
 if ($op == 'delete') {
     $id         = $_GET['id'];
-    $sql1       = "delete from mahasiswa where id = '$id'";
+    $sql1       = "DELETE FROM mahasiswa WHERE id= '$id'";
     $q1         = mysqli_query($koneksi, $sql1);
     if ($q1) {
         $sukses = "Berhasil hapus data";
@@ -32,7 +40,7 @@ if ($op == 'delete') {
 }
 if ($op == 'edit') {
     $id         = $_GET['id'];
-    $sql1       = "select * from mahasiswa where id = '$id'";
+    $sql1       = "SELECT * FROM mahasiswa WHERE id= '$id'";
     $q1         = mysqli_query($koneksi, $sql1);
     $r1         = mysqli_fetch_array($q1);
     $nim        = $r1['nim'];
@@ -52,15 +60,17 @@ if (isset($_POST['simpan'])) { //untuk create
 
     if ($nim && $nama && $alamat && $fakultas) {
         if ($op == 'edit') { //untuk update
-            $sql1       = "update mahasiswa set nim = '$nim',nama='$nama',alamat = '$alamat',fakultas='$fakultas' where id = '$id'";
+            $sql1       = "UPDATE mahasiswa SET nim = '$nim', nama='$nama',alamat= '$alamat',fakultas='$fakultas', WHERE id='$id' ";
             $q1         = mysqli_query($koneksi, $sql1);
             if ($q1) {
                 $sukses = "Data berhasil diupdate";
             } else {
                 $error  = "Data gagal diupdate";
             }
+
+            
         } else { //untuk insert
-            $sql1   = "insert into mahasiswa(nim,nama,alamat,fakultas) values ('$nim','$nama','$alamat','$fakultas')";
+            $sql1   = "INSERT INTO mahasiswa (id, nim, nama, alamat, fakultas) VALUES ('$id', '$nim','$nama','$alamat','$fakultas')";
             $q1     = mysqli_query($koneksi, $sql1);
             if ($q1) {
                 $sukses     = "Berhasil memasukkan data baru";
@@ -145,8 +155,16 @@ if (isset($_POST['simpan'])) { //untuk create
                         <div class="col-sm-10">
                             <select class="form-control" name="fakultas" id="fakultas">
                                 <option value="">- Pilih Fakultas -</option>
-                                <option value="saintek" <?php if ($fakultas == "fmipa") echo "selected" ?>>FISIP</option>
-                                <option value="soshum" <?php if ($fakultas == "fisip") echo "selected" ?>>FMIPA</option>
+                                <option value="FISIP" <?php if ($fakultas == "fisip") echo "selected" ?>>FISIP</option>
+                                <option value="FMIPA" <?php if ($fakultas == "fmipa") echo "selected" ?>>FMIPA</option>
+                                <option value="FIA" <?php if ($fakultas == "fia") echo "selected" ?>>FIA</option>
+                                <option value="FEB" <?php if ($fakultas == "feb") echo "selected" ?>>FEB</option>
+                                <option value="HUKUM" <?php if ($fakultas == "hukum") echo "selected" ?>>FHUKUM</option>
+                                <option value="KEDOKTERAN" <?php if ($fakultas == "kedokteran") echo "selected" ?>>KEDOKTERAN</option>
+                                <option value="FTeknik" <?php if ($fakultas == "fteknik") echo "selected" ?>>FTEKNIK</option>
+                                <option Value="FKH" <?php if ($fakultas == "fkh") echo "selected" ?>>FKH</option>
+                                <option Value="FPIK" <?php if ($fakultas == "fpik") echo "selected" ?>>FPIK</option>
+                                <option Value="FP" <?php if ($fakultas == "peternakan") echo "selected" ?>>FP</option>
                             </select>
                         </div>
                     </div>
@@ -184,8 +202,7 @@ if (isset($_POST['simpan'])) { //untuk create
                             $nim        = $r2['nim'];
                             $nama       = $r2['nama'];
                             $alamat     = $r2['alamat'];
-                            $fakultas   = $r2['fakultas'];
-
+                            $fakultas   = $r2['fakultas']; 
                         ?>
                             <tr>
                                 <th scope="row"><?php echo $urut++ ?></th>
@@ -194,7 +211,7 @@ if (isset($_POST['simpan'])) { //untuk create
                                 <td scope="row"><?php echo $alamat ?></td>
                                 <td scope="row"><?php echo $fakultas ?></td>
                                 <td scope="row">
-                                    <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a>
+                                    <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button><a> 
                                     <a href="index.php?op=delete&id=<?php echo $id ?>" onclick="return confirm('Yakin mau delete data?')"><button type="button" class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
